@@ -1,0 +1,45 @@
+# Global Property
+title-text: ""
+desktop-color: "#2165b5"
+terminal-left: "0"
+terminal-top: "0"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-border: "0"
+terminal-font: "GNU Unifont Regular 16"
+
+# Show the boot menu
++ boot_menu {
+  left = 8%
+  top = 17%
+  width = 500
+  height = 70%
+  item_font = "Microsoft JhengHei Regular 24"
+  item_color = "#ffffff"
+  icon_width = 128
+  icon_height = 128
+  item_icon_space = 10
+  item_height = 144
+  item_padding = 10
+  item_spacing = 10
+  selected_item_pixmap_style = "frame_*.png"
+}
+
+# Show a countdown message using the label component
++ label {
+  top = 13%
+  left = 9%
+  width = 30%
+  id = "__timeout__"
+  font = "Microsoft YaHei Regular 16"
+  text = "HOST_DISTRO 将在 %d 秒 内自动运行。"
+  color = "#ffffff"
+}
+
++ label {
+  text = "选择操作系统"
+  font = "Microsoft YaHei Regular 64"
+  top = 3%
+  left = 9%
+  color = "#ffffff"
+}

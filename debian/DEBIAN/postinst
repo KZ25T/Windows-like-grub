@@ -1,0 +1,21 @@
+#!/bin/bash
+cp -r /etc/grub.d /etc/grub.d.bak
+source /etc/os-release
+echo "generating for $NAME"
+sed -i '/^prefix=/i GRUB_THEME=/boot/grub/themes/Windows/theme.txt' /etc/grub.d/00_header
+sed -i 's/\(.*Advanced options for %s.*\)\\\$menuentry/\1\${CLASS} \\\$menuentry/' /etc/grub.d/10_linux
+sed -i 's/\(.*Advanced options for %s.*\)\\\$menuentry/\1\${CLASS} \\\$menuentry/' /etc/grub.d/30_os-prober
+sed -i 's|^\(.*\)\\$menuentry_id_option|\1--class efi \\$menuentry_id_option|' /etc/grub.d/30_uefi-firmware
+sed -i "s#HOST_DISTRO#$NAME#g" /boot/grub/themes/Windows/theme.txt
+update-grub
+
+echo -e "\e[1;33m"
+echo "Attention: This is NOT an ERROR but you have to read it."
+echo "We didn't prepare font file because of copyright. YOU SHOULD DO IT YOURSELF LIKE BELOW."
+echo "You should prepare your Microsoft YaHei and JhengHei font, name like: msjh.ttc msyh.ttc msyhl.ttc from Windows."
+echo "Then run command below:"
+echo "\$ sudo grub-mkfont -s 24 -o /boot/grub/themes/Windows/msjh24.pf2 your/msjh.ttc"
+echo "\$ sudo grub-mkfont -s 16 -o /boot/grub/themes/Windows/msyh16.pf2 your/msyh.ttc"
+echo "\$ sudo grub-mkfont -s 64 -o /boot/grub/themes/Windows/msyh64.pf2 your/msyhl.ttc"
+read -s -n 1 -p "DO YOU KNOW THAT? Press RETURN to continue."
+echo -e "\e[0m"

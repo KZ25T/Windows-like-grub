@@ -1,0 +1,16 @@
+#!/bin/bash
+dir_A="/etc/grub.d.bak"
+dir_B="/etc/grub.d"
+
+if [ -d "$dir_A" ]; then
+    if [ -d "$dir_B" ]; then
+        rm -r "$dir_B"
+		mv "$dir_A" "$dir_B"
+    else
+        echo "We have not found $dir_B, maybe it's wrong, please fix it yourself. Hope you a good luck."
+    fi
+else
+    echo "Directory $dir_A does not exist, no action taken.  Maybe it's wrong, please fix it yourself. Hope you a good luck."
+fi
+
+update-grub
